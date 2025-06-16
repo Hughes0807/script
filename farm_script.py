@@ -1461,7 +1461,7 @@ class MonsterFarmApp:
                     
                     # 发出告警声音
                     self.log_message("发现【特殊】精灵!!!")
-                    self.send_wechat_alarm(f"❗ {self.config['username']} 抓捕过程中发现【特殊】形态精灵，等待人工处理…)
+                    self.send_wechat_alarm(f"❗ {self.config['username']} 抓捕过程中发现【特殊】形态精灵，等待人工处理…")
                     winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
                     
                     # 继续寻找下一个野怪
@@ -1645,7 +1645,7 @@ class MonsterFarmApp:
                 else:
                     # 检测到特殊形态时发出告警
                     self.update_fight_log(f"❌ 检测为特殊形态，跳过此次操作...")
-                    self.send_wechat_alarm(f"❗ {self.config['username']} 刷野过程中发现【特殊】形态精灵，等待人工处理…)
+                    self.send_wechat_alarm(f"❗ {self.config['username']} 刷野过程中发现【特殊】形态精灵，等待人工处理…")
                     winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
                     
                     # 重新开始循环
