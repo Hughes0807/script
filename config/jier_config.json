@@ -1,0 +1,172 @@
+{
+    "monster_name": "jier",
+    "levels": [
+        {
+            "level": 17,
+            "max_hp": 45
+        },
+        {
+            "level": 18,
+            "max_hp": 47
+        }
+    ],
+    "rgb_points": [
+        {
+            "id": 1,
+            "name": "\u70b9\u4f4d1",
+            "x": 1418,
+            "y": 665,
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "tolerance": 10
+        },
+        {
+            "id": 2,
+            "name": "\u70b9\u4f4d2",
+            "x": 1466,
+            "y": 693,
+            "r": 213,
+            "g": 0,
+            "b": 0,
+            "tolerance": 10
+        }
+    ],
+    "monster_spots": [
+        {
+            "id": 1,
+            "region": [
+                515,
+                661,
+                36,
+                43
+            ],
+            "image_path": "images\\jier\\monster_spot_20250614010353_1.png",
+            "label": "\u533a\u57df1",
+            "click_coord": [
+                533,
+                682
+            ]
+        },
+        {
+            "id": 2,
+            "region": [
+                615,
+                512,
+                33,
+                54
+            ],
+            "image_path": "images\\jier\\monster_spot_20250614010406_2.png",
+            "label": "\u533a\u57df2",
+            "click_coord": [
+                631,
+                539
+            ]
+        },
+        {
+            "id": 3,
+            "region": [
+                694,
+                385,
+                33,
+                48
+            ],
+            "image_path": "images\\jier\\monster_spot_20250614010416_3.png",
+            "label": "\u533a\u57df3",
+            "click_coord": [
+                710,
+                409
+            ]
+        },
+        {
+            "id": 4,
+            "region": [
+                917,
+                578,
+                30,
+                56
+            ],
+            "image_path": "images\\jier\\monster_spot_20250614010426_4.png",
+            "label": "\u533a\u57df4",
+            "click_coord": [
+                932,
+                606
+            ]
+        },
+        {
+            "id": 5,
+            "region": [
+                928,
+                830,
+                34,
+                54
+            ],
+            "image_path": "images\\jier\\monster_spot_20250614010443_5.png",
+            "label": "\u533a\u57df5",
+            "click_coord": [
+                945,
+                857
+            ]
+        },
+        {
+            "id": 6,
+            "region": [
+                980,
+                388,
+                37,
+                44
+            ],
+            "image_path": "images\\jier\\monster_spot_20250614010453_6.png",
+            "label": "\u533a\u57df6",
+            "click_coord": [
+                998,
+                410
+            ]
+        },
+        {
+            "id": 7,
+            "region": [
+                1052,
+                294,
+                39,
+                51
+            ],
+            "image_path": "images\\jier\\monster_spot_20250614010616_1.png",
+            "label": "\u533a\u57df7",
+            "click_coord": [
+                1071,
+                319
+            ]
+        },
+        {
+            "id": 8,
+            "region": [
+                1088,
+                721,
+                37,
+                39
+            ],
+            "image_path": "images\\jier\\monster_spot_20250614010626_2.png",
+            "label": "\u533a\u57df8",
+            "click_coord": [
+                1106,
+                740
+            ]
+        },
+        {
+            "id": 9,
+            "region": [
+                829,
+                724,
+                51,
+                49
+            ],
+            "image_path": "images\\jier\\monster_spot_20250614011248_1.png",
+            "label": "\u533a\u57df9",
+            "click_coord": [
+                854,
+                748
+            ]
+        }
+    ]
+}

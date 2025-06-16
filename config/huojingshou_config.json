@@ -1,0 +1,112 @@
+{
+    "monster_name": "huojingshou",
+    "levels": [
+        {
+            "level": 16,
+            "max_hp": 48
+        },
+        {
+            "level": 17,
+            "max_hp": 50
+        }
+    ],
+    "rgb_points": [
+        {
+            "id": 1,
+            "name": "\u70b9\u4f4d1",
+            "x": 1481,
+            "y": 658,
+            "r": 207,
+            "g": 82,
+            "b": 133,
+            "tolerance": 10
+        },
+        {
+            "id": 2,
+            "name": "\u70b9\u4f4d2",
+            "x": 1422,
+            "y": 679,
+            "r": 247,
+            "g": 225,
+            "b": 179,
+            "tolerance": 10
+        }
+    ],
+    "monster_spots": [
+        {
+            "id": 1,
+            "region": [
+                647,
+                511,
+                46,
+                39
+            ],
+            "image_path": "images\\huojingshou\\monster_spot_20250614211825.png",
+            "label": "\u533a\u57df1",
+            "click_coord": [
+                670,
+                530
+            ]
+        },
+        {
+            "id": 2,
+            "region": [
+                1152,
+                598,
+                52,
+                55
+            ],
+            "image_path": "images\\huojingshou\\monster_spot_20250614211830.png",
+            "label": "\u533a\u57df2",
+            "click_coord": [
+                1178,
+                625
+            ]
+        },
+        {
+            "id": 3,
+            "region": [
+                796,
+                668,
+                38,
+                44
+            ],
+            "image_path": "images\\huojingshou\\monster_spot_20250614211842.png",
+            "label": "\u533a\u57df3",
+            "click_coord": [
+                815,
+                690
+            ]
+        },
+        {
+            "id": 4,
+            "region": [
+                549,
+                865,
+                36,
+                43
+            ],
+            "image_path": "images\\huojingshou\\monster_spot_20250614211853.png",
+            "label": "\u533a\u57df4",
+            "click_coord": [
+                567,
+                886
+            ]
+        },
+        {
+            "id": 5,
+            "region": [
+                454,
+                688,
+                35,
+                45
+            ],
+            "image_path": "images\\huojingshou\\monster_spot_20250614211935.png",
+            "label": "\u533a\u57df5",
+            "click_coord": [
+                471,
+                710
+            ]
+        }
+    ]
+}

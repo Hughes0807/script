@@ -1,0 +1,15 @@
+{
+    "monster_name": "wukai",
+    "levels": [
+        {
+            "level": 10,
+            "max_hp": 34
+        },
+        {
+            "level": 11,
+            "max_hp": 36
+        }
+    ],
+    "rgb_points": [],
+    "monster_spots": []
+}

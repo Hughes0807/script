@@ -1,0 +1,137 @@
+{
+    "monster_name": "liyayu",
+    "levels": [
+        {
+            "level": 15,
+            "max_hp": 43
+        },
+        {
+            "level": 16,
+            "max_hp": 45
+        }
+    ],
+    "rgb_points": [
+        {
+            "id": 1,
+            "name": "\u70b9\u4f4d1",
+            "x": 1420,
+            "y": 638,
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "tolerance": 10
+        },
+        {
+            "id": 2,
+            "name": "\u70b9\u4f4d2",
+            "x": 1499,
+            "y": 588,
+            "r": 58,
+            "g": 58,
+            "b": 58,
+            "tolerance": 10
+        },
+        {
+            "id": 3,
+            "name": "\u70b9\u4f4d3",
+            "x": 1397,
+            "y": 580,
+            "r": 58,
+            "g": 58,
+            "b": 58,
+            "tolerance": 10
+        }
+    ],
+    "monster_spots": [
+        {
+            "id": 1,
+            "region": [
+                425,
+                334,
+                37,
+                47
+            ],
+            "image_path": "images\\liyayu\\monster_spot_20250614232041.png",
+            "label": "\u533a\u57df1",
+            "click_coord": [
+                443,
+                357
+            ]
+        },
+        {
+            "id": 2,
+            "region": [
+                1286,
+                452,
+                37,
+                38
+            ],
+            "image_path": "images\\liyayu\\monster_spot_20250614232057.png",
+            "label": "\u533a\u57df2",
+            "click_coord": [
+                1304,
+                471
+            ]
+        },
+        {
+            "id": 3,
+            "region": [
+                605,
+                646,
+                43,
+                59
+            ],
+            "image_path": "images\\liyayu\\monster_spot_20250614232128.png",
+            "label": "\u533a\u57df3",
+            "click_coord": [
+                626,
+                675
+            ]
+        },
+        {
+            "id": 4,
+            "region": [
+                913,
+                695,
+                41,
+                57
+            ],
+            "image_path": "images\\liyayu\\monster_spot_20250614232145.png",
+            "label": "\u533a\u57df4",
+            "click_coord": [
+                933,
+                723
+            ]
+        },
+        {
+            "id": 5,
+            "region": [
+                1310,
+                768,
+                41,
+                55
+            ],
+            "image_path": "images\\liyayu\\monster_spot_20250614232337.png",
+            "label": "\u533a\u57df5",
+            "click_coord": [
+                1330,
+                795
+            ]
+        },
+        {
+            "id": 6,
+            "region": [
+                948,
+                163,
+                36,
+                34
+            ],
+            "image_path": "images\\liyayu\\monster_spot_20250614232353.png",
+            "label": "\u533a\u57df6",
+            "click_coord": [
+                966,
+                180
+            ]
+        }
+    ]
+}
