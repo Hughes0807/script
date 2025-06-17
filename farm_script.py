@@ -892,9 +892,14 @@ class MonsterFarmApp:
     
     def add_monster_area(self):
         """添加野怪区域"""
-        # 创建全屏透明窗口用于选择区域
-        self.root.withdraw()
+        # 最小化控制台窗口
+        self.root.iconify()
+        time.sleep(0.5)  # 给系统一点时间处理窗口最小化
         
+        # 在正常亮度下快速截取全屏（此时控制台已最小化）
+        self.full_screenshot = ImageGrab.grab()
+        
+        # 创建全屏透明窗口用于选择区域
         self.selection_window = tk.Toplevel(self.root)
         self.selection_window.attributes('-fullscreen', True)
         self.selection_window.attributes('-alpha', 0.3)
@@ -909,7 +914,7 @@ class MonsterFarmApp:
         self.canvas.create_text(
             self.selection_window.winfo_screenwidth() // 2,
             50,
-            text="拖动鼠标选择野怪区域(单击取消)",
+            text="拖动鼠标选择野怪区域, 单击取消",
             fill="white",
             font=("Arial", 24, "bold")
         )
@@ -923,6 +928,9 @@ class MonsterFarmApp:
         self.canvas.bind("<B1-Motion>", self.on_monster_drag)
         self.canvas.bind("<ButtonRelease-1>", self.on_monster_release)
         self.selection_window.bind("<Escape>", self.cancel_monster_selection)
+        
+        # 确保在窗口关闭时恢复控制台
+        self.selection_window.protocol("WM_DELETE_WINDOW", self.restore_main_window)
     
     def on_monster_press(self, event):
         self.start_x = event.x
@@ -952,7 +960,6 @@ class MonsterFarmApp:
         
         # 关闭选择窗口
         self.selection_window.destroy()
-        self.root.deiconify()
         
         # 保存截图
         monster_dir = os.path.join("images", self.monster_name)
@@ -980,7 +987,19 @@ class MonsterFarmApp:
         # 更新区域树
         self.update_area_tree()
         self.log_message(f"添加野怪区域 ID:{area_id}")
-    
+        self.restore_main_window()  # 恢复控制台窗口
+
+    def cancel_monster_selection(self, event=None):
+        """取消野怪区域选择"""
+        self.selection_window.destroy()
+        self.restore_main_window()  # 恢复控制台窗口
+
+    def restore_main_window(self):
+        """恢复控制台窗口到正常状态"""
+        self.root.deiconify()  # 从最小化状态恢复
+        self.root.lift()  # 提升到最前面
+        self.root.focus_force()  # 强制获取焦点
+
     def delete_monster_area(self):
         """删除野怪区域"""
         selected = self.area_tree.selection()
@@ -1133,7 +1152,7 @@ class MonsterFarmApp:
         self.canvas.create_text(
             self.selection_window.winfo_screenwidth() // 2,
             50,
-            text=f"拖动鼠标选择{area_type}区域 (ESC取消)",
+            text=f"鼠标选择{area_type}区域, 单击取消",
             fill="white",
             font=("Arial", 24, "bold")
         )
