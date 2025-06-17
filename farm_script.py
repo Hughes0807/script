@@ -136,6 +136,9 @@ class MonsterFarmApp:
         btn_frame = ttk.Frame(name_frame)
         btn_frame.pack(side=tk.RIGHT, padx=5)
 
+        add_btn = ttk.Button(btn_frame, text="新增配置", command=self.add_config)
+        add_btn.pack(side=tk.LEFT, padx=2)
+
         load_btn = ttk.Button(btn_frame, text="加载配置", command=self.load_config)
         load_btn.pack(side=tk.LEFT, padx=2)
 
@@ -494,7 +497,44 @@ class MonsterFarmApp:
             self.update_fight_log(f"刷野配置已保存到 {config_path}")
         except Exception as e:
             self.update_fight_log(f"保存刷野配置失败: {e}")
-    
+
+    def add_config(self):
+        """新增野怪配置"""
+        self.monster_name = self.monster_var.get().strip()
+        if not self.monster_name:
+            messagebox.showwarning("警告", "请输入野怪名称")
+            return
+        
+        config_path = os.path.join("config", f"{self.monster_name}_config.json")
+        
+        if os.path.exists(config_path):
+            # 配置已存在，加载该配置
+            messagebox.showinfo("信息", f"野怪 {self.monster_name} 配置已存在，即将加载配置")
+            self.load_config()
+        else:
+            # 配置不存在，清空相关配置数据
+            # 清空等级与血量配置
+            self.level1_var.set(0)
+            self.hp1_var.set(0)
+            self.level2_var.set(0)
+            self.hp2_var.set(0)
+            
+            # 清空RGB选点配置
+            self.rgb_points = []
+            self.update_point_tree()
+            
+            # 清空野怪区域配置
+            self.monster_spots = []
+            self.update_area_tree()
+            
+            # 清空预览
+            self.preview_label.config(image=None, text="选择一个点查看预览")
+            self.area_preview_label.config(image=None, text="选择一个区域查看预览")
+            
+            # 提示用户
+            messagebox.showinfo("信息", f"已为 {self.monster_name} 创建新配置，请填写配置信息并保存")
+            self.log_message(f"已为 {self.monster_name} 创建新配置")
+
     def load_config(self):
         """加载配置"""
         self.monster_name = self.monster_var.get().strip()
@@ -614,7 +654,6 @@ class MonsterFarmApp:
         
         # 绑定鼠标事件
         self.canvas.bind("<ButtonPress-1>", self.on_rgb_press)
-        self.selection_window.bind("<Escape>", self.cancel_rgb_selection)
     
     def on_rgb_press(self, event):
         """处理鼠标点击事件 - 使用正常亮度截图获取RGB值"""
@@ -926,9 +965,7 @@ class MonsterFarmApp:
         # 绑定鼠标事件
         self.canvas.bind("<ButtonPress-1>", self.on_monster_press)
         self.canvas.bind("<B1-Motion>", self.on_monster_drag)
-        self.canvas.bind("<ButtonRelease-1>", self.on_monster_release)
-        self.selection_window.bind("<Escape>", self.cancel_monster_selection)
-        
+        self.canvas.bind("<ButtonRelease-1>", self.on_monster_release)        
         # 确保在窗口关闭时恢复控制台
         self.selection_window.protocol("WM_DELETE_WINDOW", self.restore_main_window)
     
@@ -1166,7 +1203,6 @@ class MonsterFarmApp:
         self.canvas.bind("<ButtonPress-1>", self.on_area_press)
         self.canvas.bind("<B1-Motion>", self.on_area_drag)
         self.canvas.bind("<ButtonRelease-1>", self.on_area_release)
-        self.selection_window.bind("<Escape>", self.cancel_area_selection)
     
     def on_area_press(self, event):
         self.start_x = event.x
