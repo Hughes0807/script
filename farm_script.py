@@ -113,9 +113,11 @@ class MonsterFarmApp:
         }
         try:
             response = requests.post(url, headers=headers, json=data)
-            self.log(f"[企业微信] 已发送通知：{content}")
+            # 使用 log_message 代替 log
+            self.log_message(f"[企业微信] 已发送通知：{content}")
         except Exception as e:
-            self.log(f"[企业微信] 发送失败：{e}")
+            # 使用 log_message 代替 log
+            self.log_message(f"[企业微信] 发送失败：{e}")
 
     def setup_config_tab(self):
         """设置配置管理标签页"""
