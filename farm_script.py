@@ -8,6 +8,7 @@ import pytesseract
 import winsound
 import threading
 import tkinter as tk
+import requests
 from tkinter import ttk, messagebox, scrolledtext
 from PIL import Image, ImageGrab, ImageTk, ImageDraw
 from datetime import datetime
@@ -16,7 +17,7 @@ from datetime import datetime
 os.makedirs("images", exist_ok=True)
 os.makedirs("config", exist_ok=True)
 
-# 固定配置
+# 图片识别基础信息：战斗界面、结束界面、材料界面
 FIGHT_REGION = (1334, 774, 413, 237)
 FIGHT_IMAGE_PATH = "images/fight.png"
 OVER_REGION = (697, 364, 522, 384)
@@ -48,23 +49,18 @@ class MonsterFarmApp:
         # 创建主框架
         self.main_frame = ttk.Frame(root)
         self.main_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
-
         # 创建标签页
         self.notebook = ttk.Notebook(self.main_frame)
         self.notebook.pack(fill=tk.BOTH, expand=True)
-
         # 创建配置管理标签页
         self.config_frame = ttk.Frame(self.notebook)
         self.notebook.add(self.config_frame, text="配置管理")
-
         # 创建野怪区域标签页
         self.areas_frame = ttk.Frame(self.notebook)
         self.notebook.add(self.areas_frame, text="野怪区域")
-
         # 创建自动抓捕标签页
         self.farm_frame = ttk.Frame(self.notebook)
         self.notebook.add(self.farm_frame, text="自动抓捕")
-
         # 创建自动刷野标签页
         self.fight_frame = ttk.Frame(self.notebook)
         self.notebook.add(self.fight_frame, text="自动刷野")
@@ -117,9 +113,12 @@ class MonsterFarmApp:
         }
         try:
             response = requests.post(url, headers=headers, json=data)
-            self.log(f"[企业微信] 已发送通知：{content}")
+            # 使用 log_message 代替 log
+            self.log_message(f"[企业微信] 已发送通知：{content}")
         except Exception as e:
-            self.log(f"[企业微信] 发送失败：{e}")
+            # 使用 log_message 代替 log
+            self.log_message(f"[企业微信] 发送失败：{e}")
+
     def setup_config_tab(self):
         """设置配置管理标签页"""
         # 野怪配置部分
@@ -138,6 +137,9 @@ class MonsterFarmApp:
         # 配置操作按钮
         btn_frame = ttk.Frame(name_frame)
         btn_frame.pack(side=tk.RIGHT, padx=5)
+
+        add_btn = ttk.Button(btn_frame, text="新增配置", command=self.add_config)
+        add_btn.pack(side=tk.LEFT, padx=2)
 
         load_btn = ttk.Button(btn_frame, text="加载配置", command=self.load_config)
         load_btn.pack(side=tk.LEFT, padx=2)
@@ -497,7 +499,44 @@ class MonsterFarmApp:
             self.update_fight_log(f"刷野配置已保存到 {config_path}")
         except Exception as e:
             self.update_fight_log(f"保存刷野配置失败: {e}")
-    
+
+    def add_config(self):
+        """新增野怪配置"""
+        self.monster_name = self.monster_var.get().strip()
+        if not self.monster_name:
+            messagebox.showwarning("警告", "请输入野怪名称")
+            return
+        
+        config_path = os.path.join("config", f"{self.monster_name}_config.json")
+        
+        if os.path.exists(config_path):
+            # 配置已存在，加载该配置
+            messagebox.showinfo("信息", f"野怪 {self.monster_name} 配置已存在，即将加载配置")
+            self.load_config()
+        else:
+            # 配置不存在，清空相关配置数据
+            # 清空等级与血量配置
+            self.level1_var.set(0)
+            self.hp1_var.set(0)
+            self.level2_var.set(0)
+            self.hp2_var.set(0)
+            
+            # 清空RGB选点配置
+            self.rgb_points = []
+            self.update_point_tree()
+            
+            # 清空野怪区域配置
+            self.monster_spots = []
+            self.update_area_tree()
+            
+            # 清空预览
+            self.preview_label.config(image=None, text="选择一个点查看预览")
+            self.area_preview_label.config(image=None, text="选择一个区域查看预览")
+            
+            # 提示用户
+            messagebox.showinfo("信息", f"已为 {self.monster_name} 创建新配置，请填写配置信息并保存")
+            self.log_message(f"已为 {self.monster_name} 创建新配置")
+
     def load_config(self):
         """加载配置"""
         self.monster_name = self.monster_var.get().strip()
@@ -610,14 +649,13 @@ class MonsterFarmApp:
         self.canvas.create_text(
             self.selection_window.winfo_screenwidth() // 2,
             50,
-            text="点击屏幕选择点位 (ESC取消)",
+            text="点击屏幕选择点位",
             fill="white",
             font=("Arial", 24, "bold")
         )
         
         # 绑定鼠标事件
         self.canvas.bind("<ButtonPress-1>", self.on_rgb_press)
-        self.selection_window.bind("<Escape>", self.cancel_rgb_selection)
     
     def on_rgb_press(self, event):
         """处理鼠标点击事件 - 使用正常亮度截图获取RGB值"""
@@ -645,7 +683,7 @@ class MonsterFarmApp:
             "r": rgb[0],
             "g": rgb[1],
             "b": rgb[2],
-            "tolerance": 10  # 默认容差
+            "tolerance": 0  # 默认容差
         }
         
         # 添加到点列表
@@ -895,9 +933,14 @@ class MonsterFarmApp:
     
     def add_monster_area(self):
         """添加野怪区域"""
-        # 创建全屏透明窗口用于选择区域
-        self.root.withdraw()
+        # 最小化控制台窗口
+        self.root.iconify()
+        time.sleep(0.5)  # 给系统一点时间处理窗口最小化
         
+        # 在正常亮度下快速截取全屏（此时控制台已最小化）
+        self.full_screenshot = ImageGrab.grab()
+        
+        # 创建全屏透明窗口用于选择区域
         self.selection_window = tk.Toplevel(self.root)
         self.selection_window.attributes('-fullscreen', True)
         self.selection_window.attributes('-alpha', 0.3)
@@ -912,7 +955,7 @@ class MonsterFarmApp:
         self.canvas.create_text(
             self.selection_window.winfo_screenwidth() // 2,
             50,
-            text="拖动鼠标选择野怪区域 (ESC取消)",
+            text="拖动鼠标选择野怪区域, 单击取消",
             fill="white",
             font=("Arial", 24, "bold")
         )
@@ -924,8 +967,9 @@ class MonsterFarmApp:
         # 绑定鼠标事件
         self.canvas.bind("<ButtonPress-1>", self.on_monster_press)
         self.canvas.bind("<B1-Motion>", self.on_monster_drag)
-        self.canvas.bind("<ButtonRelease-1>", self.on_monster_release)
-        self.selection_window.bind("<Escape>", self.cancel_monster_selection)
+        self.canvas.bind("<ButtonRelease-1>", self.on_monster_release)        
+        # 确保在窗口关闭时恢复控制台
+        self.selection_window.protocol("WM_DELETE_WINDOW", self.restore_main_window)
     
     def on_monster_press(self, event):
         self.start_x = event.x
@@ -955,7 +999,6 @@ class MonsterFarmApp:
         
         # 关闭选择窗口
         self.selection_window.destroy()
-        self.root.deiconify()
         
         # 保存截图
         monster_dir = os.path.join("images", self.monster_name)
@@ -983,7 +1026,19 @@ class MonsterFarmApp:
         # 更新区域树
         self.update_area_tree()
         self.log_message(f"添加野怪区域 ID:{area_id}")
-    
+        self.restore_main_window()  # 恢复控制台窗口
+
+    def cancel_monster_selection(self, event=None):
+        """取消野怪区域选择"""
+        self.selection_window.destroy()
+        self.restore_main_window()  # 恢复控制台窗口
+
+    def restore_main_window(self):
+        """恢复控制台窗口到正常状态"""
+        self.root.deiconify()  # 从最小化状态恢复
+        self.root.lift()  # 提升到最前面
+        self.root.focus_force()  # 强制获取焦点
+
     def delete_monster_area(self):
         """删除野怪区域"""
         selected = self.area_tree.selection()
@@ -993,6 +1048,15 @@ class MonsterFarmApp:
         item = self.area_tree.item(selected[0])
         area_id = item["values"][0]
         
+        # 删除图片功能
+        area_to_delete = next((a for a in self.monster_spots if a["id"] == area_id), None)
+        if area_to_delete and os.path.exists(area_to_delete["image_path"]):
+            try:
+                os.remove(area_to_delete["image_path"])
+                self.log_message(f"已删除区域图片: {area_to_delete['image_path']}")
+            except Exception as e:
+                self.log_message(f"删除图片失败: {e}")
+
         # 从区域列表中删除
         self.monster_spots = [a for a in self.monster_spots if a["id"] != area_id]
         
@@ -1028,31 +1092,81 @@ class MonsterFarmApp:
             ))
     
     def show_area_preview(self, event):
-        """显示区域预览"""
+        """显示区域预览 - 在白色背景上显示所有区域贴图"""
+        # 获取当前选中的区域ID
+        selected_id = None
         selected = self.area_tree.selection()
-        if not selected:
-            return
-            
-        item = self.area_tree.item(selected[0])
-        values = item["values"]
-        x, y, width, height = values[2], values[3], values[4], values[5]
+        if selected:
+            item = self.area_tree.item(selected[0])
+            values = item["values"]
+            selected_id = values[0]  # 区域ID
         
-        # 截取区域
-        try:
-            screenshot = ImageGrab.grab(bbox=(x, y, x + width, y + height))
+        # 获取当前屏幕尺寸
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+        
+        # 创建预览图像（使用实际屏幕尺寸的1/4大小）
+        preview_width = screen_width // 2
+        preview_height = screen_height // 2
+        scale_factor = preview_width / screen_width
+        
+        # 创建白色背景图像
+        bg_color = (255, 255, 255)  # 白色背景
+        preview_img = Image.new('RGB', (preview_width, preview_height), bg_color)
+        draw = ImageDraw.Draw(preview_img)
+        
+        # 绘制所有区域
+        for area in self.monster_spots:
+            # 计算缩放后的坐标和尺寸
+            x, y, width, height = area["region"]
+            scaled_x = int(x * scale_factor)
+            scaled_y = int(y * scale_factor)
+            scaled_width = int(width * scale_factor)
+            scaled_height = int(height * scale_factor)
             
-            # 调整大小以适应预览
-            max_size = 300
-            ratio = min(max_size / width, max_size / height)
-            new_size = (int(width * ratio), int(height * ratio))
-            resized_img = screenshot.resize(new_size, Image.LANCZOS)
+            # 加载区域图像
+            try:
+                area_img = Image.open(area["image_path"])
+                # 调整图像大小
+                area_img = area_img.resize((scaled_width, scaled_height), Image.LANCZOS)
+                # 将区域图像粘贴到预览背景上
+                preview_img.paste(area_img, (scaled_x, scaled_y))
+            except Exception as e:
+                print(f"加载区域图像错误: {e}")
             
-            # 显示图像
-            photo = ImageTk.PhotoImage(resized_img)
-            self.area_preview_label.configure(image=photo)
-            self.area_preview_label.image = photo
-        except Exception as e:
-            print(f"区域预览错误: {e}")
+            # 如果是当前选中的区域，添加红色边框
+            if selected_id is not None and area["id"] == selected_id:
+                # 绘制红色边框
+                draw.rectangle(
+                    [scaled_x, scaled_y, scaled_x + scaled_width, scaled_y + scaled_height],
+                    outline="red", 
+                    width=3
+                )
+       
+        # 创建可点击的预览标签
+        photo = ImageTk.PhotoImage(preview_img)
+        self.area_preview_label.configure(image=photo)
+        self.area_preview_label.image = photo
+        
+        # 绑定点击事件以放大预览
+        self.area_preview_label.bind("<Button-1>", lambda e: self.show_full_preview(preview_img))
+
+    def show_full_preview(self, preview_img):
+        """显示完整大小的预览图"""
+        # 创建新窗口显示完整预览
+        preview_window = tk.Toplevel(self.root)
+        preview_window.title("完整区域预览")
+        preview_window.geometry(f"{preview_img.width}x{preview_img.height}")
+        
+        # 创建图像标签
+        photo = ImageTk.PhotoImage(preview_img)
+        preview_label = tk.Label(preview_window, image=photo)
+        preview_label.image = photo  # 保持引用
+        preview_label.pack(fill=tk.BOTH, expand=True)
+        
+        # 添加关闭按钮
+        close_btn = ttk.Button(preview_window, text="关闭", command=preview_window.destroy)
+        close_btn.pack(pady=10)
     
     def select_area(self, area_type):
         """选择OCR区域"""
@@ -1077,7 +1191,7 @@ class MonsterFarmApp:
         self.canvas.create_text(
             self.selection_window.winfo_screenwidth() // 2,
             50,
-            text=f"拖动鼠标选择{area_type}区域 (ESC取消)",
+            text=f"鼠标选择{area_type}区域, 单击取消",
             fill="white",
             font=("Arial", 24, "bold")
         )
@@ -1091,7 +1205,6 @@ class MonsterFarmApp:
         self.canvas.bind("<ButtonPress-1>", self.on_area_press)
         self.canvas.bind("<B1-Motion>", self.on_area_drag)
         self.canvas.bind("<ButtonRelease-1>", self.on_area_release)
-        self.selection_window.bind("<Escape>", self.cancel_area_selection)
     
     def on_area_press(self, event):
         self.start_x = event.x
@@ -1461,7 +1574,7 @@ class MonsterFarmApp:
                     
                     # 发出告警声音
                     self.log_message("发现【特殊】精灵!!!")
-                    self.send_wechat_alarm(f"❗ {self.config['username']} 抓捕过程中发现【特殊】形态精灵，等待人工处理…)
+                    self.send_wechat_alarm(f"❗ {self.fight_config['username']} ❗ 抓捕过程中发现【特殊】形态精灵，等待人工处理…")
                     winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
                     
                     # 继续寻找下一个野怪
@@ -1645,7 +1758,7 @@ class MonsterFarmApp:
                 else:
                     # 检测到特殊形态时发出告警
                     self.update_fight_log(f"❌ 检测为特殊形态，跳过此次操作...")
-                    self.send_wechat_alarm(f"❗ {self.config['username']} 刷野过程中发现【特殊】形态精灵，等待人工处理…)
+                    self.send_wechat_alarm(f"❗ {self.fight_config['username']} ❗ 抓捕过程中发现【特殊】形态精灵，等待人工处理…")
                     winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
                     
                     # 重新开始循环
