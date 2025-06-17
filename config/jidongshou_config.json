@@ -1,0 +1,157 @@
+{
+    "monster_name": "jidongshou",
+    "levels": [
+        {
+            "level": 16,
+            "max_hp": 48
+        },
+        {
+            "level": 17,
+            "max_hp": 50
+        }
+    ],
+    "rgb_points": [
+        {
+            "id": 1,
+            "name": "\u70b9\u4f4d1",
+            "x": 1405,
+            "y": 603,
+            "r": 93,
+            "g": 202,
+            "b": 243,
+            "tolerance": 10
+        },
+        {
+            "id": 2,
+            "name": "\u70b9\u4f4d2",
+            "x": 1488,
+            "y": 712,
+            "r": 254,
+            "g": 254,
+            "b": 254,
+            "tolerance": 10
+        }
+    ],
+    "monster_spots": [
+        {
+            "id": 1,
+            "region": [
+                476,
+                724,
+                91,
+                87
+            ],
+            "image_path": "images\\jidongshou\\monster_spot_20250616221700.png",
+            "label": "\u533a\u57df1",
+            "click_coord": [
+                521,
+                767
+            ]
+        },
+        {
+            "id": 2,
+            "region": [
+                863,
+                731,
+                103,
+                103
+            ],
+            "image_path": "images\\jidongshou\\monster_spot_20250616221748.png",
+            "label": "\u533a\u57df2",
+            "click_coord": [
+                914,
+                782
+            ]
+        },
+        {
+            "id": 3,
+            "region": [
+                1060,
+                391,
+                80,
+                97
+            ],
+            "image_path": "images\\jidongshou\\monster_spot_20250616221804.png",
+            "label": "\u533a\u57df3",
+            "click_coord": [
+                1100,
+                439
+            ]
+        },
+        {
+            "id": 4,
+            "region": [
+                1443,
+                578,
+                71,
+                94
+            ],
+            "image_path": "images\\jidongshou\\monster_spot_20250616221820.png",
+            "label": "\u533a\u57df4",
+            "click_coord": [
+                1478,
+                625
+            ]
+        },
+        {
+            "id": 5,
+            "region": [
+                1158,
+                538,
+                78,
+                97
+            ],
+            "image_path": "images\\jidongshou\\monster_spot_20250616221852.png",
+            "label": "\u533a\u57df5",
+            "click_coord": [
+                1197,
+                586
+            ]
+        },
+        {
+            "id": 6,
+            "region": [
+                1273,
+                664,
+                92,
+                94
+            ],
+            "image_path": "images\\jidongshou\\monster_spot_20250616221940.png",
+            "label": "\u533a\u57df6",
+            "click_coord": [
+                1319,
+                711
+            ]
+        },
+        {
+            "id": 7,
+            "region": [
+                705,
+                683,
+                80,
+                96
+            ],
+            "image_path": "images\\jidongshou\\monster_spot_20250616221956.png",
+            "label": "\u533a\u57df7",
+            "click_coord": [
+                745,
+                731
+            ]
+        },
+        {
+            "id": 8,
+            "region": [
+                1058,
+                712,
+                77,
+                90
+            ],
+            "image_path": "images\\jidongshou\\monster_spot_20250616222013.png",
+            "label": "\u533a\u57df8",
+            "click_coord": [
+                1096,
+                757
+            ]
+        }
+    ]
+}

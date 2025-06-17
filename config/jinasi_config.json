@@ -1,0 +1,157 @@
+{
+    "monster_name": "jinasi",
+    "levels": [
+        {
+            "level": 99,
+            "max_hp": 111
+        },
+        {
+            "level": 100,
+            "max_hp": 111
+        }
+    ],
+    "rgb_points": [
+        {
+            "id": 1,
+            "name": "\u70b9\u4f4d3",
+            "x": 1270,
+            "y": 439,
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "tolerance": 0
+        },
+        {
+            "id": 2,
+            "name": "\u70b9\u4f4d2",
+            "x": 1568,
+            "y": 463,
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "tolerance": 0
+        }
+    ],
+    "monster_spots": [
+        {
+            "id": 1,
+            "region": [
+                1074,
+                683,
+                28,
+                28
+            ],
+            "image_path": "images\\jinasi\\monster_spot_20250617192202.png",
+            "label": "\u533a\u57df1",
+            "click_coord": [
+                1088,
+                697
+            ]
+        },
+        {
+            "id": 2,
+            "region": [
+                1185,
+                789,
+                31,
+                28
+            ],
+            "image_path": "images\\jinasi\\monster_spot_20250617192218.png",
+            "label": "\u533a\u57df2",
+            "click_coord": [
+                1200,
+                803
+            ]
+        },
+        {
+            "id": 3,
+            "region": [
+                665,
+                723,
+                28,
+                26
+            ],
+            "image_path": "images\\jinasi\\monster_spot_20250617192250.png",
+            "label": "\u533a\u57df3",
+            "click_coord": [
+                679,
+                736
+            ]
+        },
+        {
+            "id": 4,
+            "region": [
+                1374,
+                835,
+                26,
+                25
+            ],
+            "image_path": "images\\jinasi\\monster_spot_20250617192306.png",
+            "label": "\u533a\u57df4",
+            "click_coord": [
+                1387,
+                847
+            ]
+        },
+        {
+            "id": 5,
+            "region": [
+                1082,
+                830,
+                28,
+                30
+            ],
+            "image_path": "images\\jinasi\\monster_spot_20250617192354.png",
+            "label": "\u533a\u57df5",
+            "click_coord": [
+                1096,
+                845
+            ]
+        },
+        {
+            "id": 6,
+            "region": [
+                1426,
+                555,
+                31,
+                23
+            ],
+            "image_path": "images\\jinasi\\monster_spot_20250617192426.png",
+            "label": "\u533a\u57df6",
+            "click_coord": [
+                1441,
+                566
+            ]
+        },
+        {
+            "id": 7,
+            "region": [
+                841,
+                807,
+                31,
+                27
+            ],
+            "image_path": "images\\jinasi\\monster_spot_20250617192513.png",
+            "label": "\u533a\u57df7",
+            "click_coord": [
+                856,
+                820
+            ]
+        },
+        {
+            "id": 8,
+            "region": [
+                1374,
+                458,
+                24,
+                28
+            ],
+            "image_path": "images\\jinasi\\monster_spot_20250617192530.png",
+            "label": "\u533a\u57df8",
+            "click_coord": [
+                1386,
+                472
+            ]
+        }
+    ]
+}

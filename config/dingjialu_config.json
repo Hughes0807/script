@@ -1,0 +1,157 @@
+{
+    "monster_name": "dingjialu",
+    "levels": [
+        {
+            "level": 50,
+            "max_hp": 50
+        },
+        {
+            "level": 51,
+            "max_hp": 51
+        }
+    ],
+    "rgb_points": [
+        {
+            "id": 1,
+            "name": "\u70b9\u4f4d1",
+            "x": 1460,
+            "y": 648,
+            "r": 157,
+            "g": 123,
+            "b": 123,
+            "tolerance": 10
+        },
+        {
+            "id": 2,
+            "name": "\u70b9\u4f4d2",
+            "x": 1397,
+            "y": 634,
+            "r": 215,
+            "g": 198,
+            "b": 193,
+            "tolerance": 10
+        }
+    ],
+    "monster_spots": [
+        {
+            "id": 1,
+            "region": [
+                1289,
+                704,
+                39,
+                38
+            ],
+            "image_path": "images\\dingjialu\\monster_spot_20250615173442.png",
+            "label": "\u533a\u57df1",
+            "click_coord": [
+                1308,
+                723
+            ]
+        },
+        {
+            "id": 2,
+            "region": [
+                1384,
+                606,
+                30,
+                39
+            ],
+            "image_path": "images\\dingjialu\\monster_spot_20250615173531.png",
+            "label": "\u533a\u57df3",
+            "click_coord": [
+                1399,
+                625
+            ]
+        },
+        {
+            "id": 3,
+            "region": [
+                294,
+                625,
+                27,
+                41
+            ],
+            "image_path": "images\\dingjialu\\monster_spot_20250615173602.png",
+            "label": "\u533a\u57df3",
+            "click_coord": [
+                307,
+                645
+            ]
+        },
+        {
+            "id": 4,
+            "region": [
+                1134,
+                647,
+                35,
+                35
+            ],
+            "image_path": "images\\dingjialu\\monster_spot_20250615173643.png",
+            "label": "\u533a\u57df5",
+            "click_coord": [
+                1151,
+                664
+            ]
+        },
+        {
+            "id": 5,
+            "region": [
+                746,
+                341,
+                37,
+                36
+            ],
+            "image_path": "images\\dingjialu\\monster_spot_20250615173614.png",
+            "label": "\u533a\u57df4",
+            "click_coord": [
+                764,
+                359
+            ]
+        },
+        {
+            "id": 6,
+            "region": [
+                507,
+                613,
+                37,
+                41
+            ],
+            "image_path": "images\\dingjialu\\monster_spot_20250615174113.png",
+            "label": "\u533a\u57df6",
+            "click_coord": [
+                525,
+                633
+            ]
+        },
+        {
+            "id": 7,
+            "region": [
+                633,
+                433,
+                24,
+                34
+            ],
+            "image_path": "images\\dingjialu\\monster_spot_20250615174221.png",
+            "label": "\u533a\u57df7",
+            "click_coord": [
+                645,
+                450
+            ]
+        },
+        {
+            "id": 8,
+            "region": [
+                921,
+                369,
+                35,
+                28
+            ],
+            "image_path": "images\\dingjialu\\monster_spot_20250615192928.png",
+            "label": "\u533a\u57df1",
+            "click_coord": [
+                938,
+                383
+            ]
+        }
+    ]
+}

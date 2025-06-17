@@ -1,0 +1,282 @@
+{
+    "monster_name": "xuanbing",
+    "levels": [
+        {
+            "level": 16,
+            "max_hp": 48
+        },
+        {
+            "level": 17,
+            "max_hp": 50
+        }
+    ],
+    "rgb_points": [
+        {
+            "id": 1,
+            "name": "\u70b9\u4f4d3",
+            "x": 1565,
+            "y": 199,
+            "r": 51,
+            "g": 148,
+            "b": 212,
+            "tolerance": 0
+        }
+    ],
+    "monster_spots": [
+        {
+            "id": 1,
+            "region": [
+                476,
+                724,
+                91,
+                87
+            ],
+            "image_path": "images\\jidongshou\\monster_spot_20250616221700.png",
+            "label": "\u533a\u57df1",
+            "click_coord": [
+                521,
+                767
+            ]
+        },
+        {
+            "id": 2,
+            "region": [
+                863,
+                731,
+                103,
+                103
+            ],
+            "image_path": "images\\jidongshou\\monster_spot_20250616221748.png",
+            "label": "\u533a\u57df2",
+            "click_coord": [
+                914,
+                782
+            ]
+        },
+        {
+            "id": 3,
+            "region": [
+                1060,
+                391,
+                80,
+                97
+            ],
+            "image_path": "images\\jidongshou\\monster_spot_20250616221804.png",
+            "label": "\u533a\u57df3",
+            "click_coord": [
+                1100,
+                439
+            ]
+        },
+        {
+            "id": 4,
+            "region": [
+                1443,
+                578,
+                71,
+                94
+            ],
+            "image_path": "images\\jidongshou\\monster_spot_20250616221820.png",
+            "label": "\u533a\u57df4",
+            "click_coord": [
+                1478,
+                625
+            ]
+        },
+        {
+            "id": 5,
+            "region": [
+                1158,
+                538,
+                78,
+                97
+            ],
+            "image_path": "images\\jidongshou\\monster_spot_20250616221852.png",
+            "label": "\u533a\u57df5",
+            "click_coord": [
+                1197,
+                586
+            ]
+        },
+        {
+            "id": 6,
+            "region": [
+                1273,
+                664,
+                92,
+                94
+            ],
+            "image_path": "images\\jidongshou\\monster_spot_20250616221940.png",
+            "label": "\u533a\u57df6",
+            "click_coord": [
+                1319,
+                711
+            ]
+        },
+        {
+            "id": 7,
+            "region": [
+                705,
+                683,
+                80,
+                96
+            ],
+            "image_path": "images\\jidongshou\\monster_spot_20250616221956.png",
+            "label": "\u533a\u57df7",
+            "click_coord": [
+                745,
+                731
+            ]
+        },
+        {
+            "id": 8,
+            "region": [
+                1058,
+                712,
+                77,
+                90
+            ],
+            "image_path": "images\\jidongshou\\monster_spot_20250616222013.png",
+            "label": "\u533a\u57df8",
+            "click_coord": [
+                1096,
+                757
+            ]
+        },
+        {
+            "id": 1,
+            "region": [
+                880,
+                601,
+                66,
+                76
+            ],
+            "image_path": "images\\xuanbingshou\\monster_spot_20250612215209_1.png",
+            "label": "\u533a\u57df1",
+            "click_coord": [
+                913,
+                639
+            ]
+        },
+        {
+            "id": 2,
+            "region": [
+                484,
+                737,
+                70,
+                75
+            ],
+            "image_path": "images\\xuanbingshou\\monster_spot_20250612215226_2.png",
+            "label": "\u533a\u57df2",
+            "click_coord": [
+                519,
+                774
+            ]
+        },
+        {
+            "id": 3,
+            "region": [
+                1285,
+                677,
+                66,
+                77
+            ],
+            "image_path": "images\\xuanbingshou\\monster_spot_20250612215242_3.png",
+            "label": "\u533a\u57df3",
+            "click_coord": [
+                1318,
+                715
+            ]
+        },
+        {
+            "id": 4,
+            "region": [
+                1446,
+                585,
+                67,
+                79
+            ],
+            "image_path": "images\\xuanbingshou\\monster_spot_20250612215314_4.png",
+            "label": "\u533a\u57df4",
+            "click_coord": [
+                1479,
+                624
+            ]
+        },
+        {
+            "id": 5,
+            "region": [
+                1061,
+                724,
+                68,
+                70
+            ],
+            "image_path": "images\\xuanbingshou\\monster_spot_20250612215402_5.png",
+            "label": "\u533a\u57df5",
+            "click_coord": [
+                1095,
+                759
+            ]
+        },
+        {
+            "id": 6,
+            "region": [
+                1068,
+                407,
+                65,
+                72
+            ],
+            "image_path": "images\\xuanbingshou\\monster_spot_20250612215418_6.png",
+            "label": "\u533a\u57df6",
+            "click_coord": [
+                1100,
+                443
+            ]
+        },
+        {
+            "id": 7,
+            "region": [
+                878,
+                753,
+                71,
+                73
+            ],
+            "image_path": "images\\xuanbingshou\\monster_spot_20250612215434_7.png",
+            "label": "\u533a\u57df7",
+            "click_coord": [
+                913,
+                789
+            ]
+        },
+        {
+            "id": 8,
+            "region": [
+                1163,
+                561,
+                67,
+                70
+            ],
+            "image_path": "images\\xuanbingshou\\monster_spot_20250612215609_8.png",
+            "label": "\u533a\u57df8",
+            "click_coord": [
+                1196,
+                596
+            ]
+        },
+        {
+            "id": 9,
+            "region": [
+                705,
+                699,
+                73,
+                81
+            ],
+            "image_path": "images\\xuanbingshou\\monster_spot_20250612220342_1.png",
+            "label": "\u533a\u57df9",
+            "click_coord": [
+                741,
+                739
+            ]
+        }
+    ]
+}
