@@ -1033,68 +1033,81 @@ class MonsterFarmApp:
             ))
     
     def show_area_preview(self, event):
-        """显示区域预览"""
+        """显示区域预览 - 在白色背景上显示所有区域贴图"""
+        # 获取当前选中的区域ID
+        selected_id = None
         selected = self.area_tree.selection()
-        if not selected:
-            return
-            
-        item = self.area_tree.item(selected[0])
-        values = item["values"]
-        x, y, width, height = values[2], values[3], values[4], values[5]
+        if selected:
+            item = self.area_tree.item(selected[0])
+            values = item["values"]
+            selected_id = values[0]  # 区域ID
         
-        # 创建一个白色背景图像
-        preview_width = 800  # 预览区域宽度
-        preview_height = 600  # 预览区域高度
+        # 获取当前屏幕尺寸
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+        
+        # 创建预览图像（使用实际屏幕尺寸的1/4大小）
+        preview_width = screen_width // 2
+        preview_height = screen_height // 2
+        scale_factor = preview_width / screen_width
+        
+        # 创建白色背景图像
         bg_color = (255, 255, 255)  # 白色背景
-        
-        # 创建背景图像
         preview_img = Image.new('RGB', (preview_width, preview_height), bg_color)
         draw = ImageDraw.Draw(preview_img)
         
         # 绘制所有区域
         for area in self.monster_spots:
-            area_x, area_y, area_w, area_h = area["region"]
-            area_img_path = area["image_path"]
+            # 计算缩放后的坐标和尺寸
+            x, y, width, height = area["region"]
+            scaled_x = int(x * scale_factor)
+            scaled_y = int(y * scale_factor)
+            scaled_width = int(width * scale_factor)
+            scaled_height = int(height * scale_factor)
             
+            # 加载区域图像
             try:
-                # 加载区域图像
-                area_img = Image.open(area_img_path)
-                
-                # 计算在预览中的位置和大小
-                scale = min(preview_width / 1920, preview_height / 1080)  # 假设屏幕分辨率为1920x1080
-                preview_x = int(area_x * scale)
-                preview_y = int(area_y * scale)
-                preview_w = int(area_w * scale)
-                preview_h = int(area_h * scale)
-                
+                area_img = Image.open(area["image_path"])
                 # 调整图像大小
-                area_img = area_img.resize((preview_w, preview_h), Image.LANCZOS)
-                
+                area_img = area_img.resize((scaled_width, scaled_height), Image.LANCZOS)
                 # 将区域图像粘贴到预览背景上
-                preview_img.paste(area_img, (preview_x, preview_y))
-                
-                # 绘制区域边框和标签
-                draw.rectangle([preview_x, preview_y, preview_x + preview_w, preview_y + preview_h], 
-                             outline="red", width=2)
-                draw.text((preview_x + 5, preview_y + 5), area["label"], fill="red")
-                
+                preview_img.paste(area_img, (scaled_x, scaled_y))
             except Exception as e:
                 print(f"加载区域图像错误: {e}")
-                # 如果无法加载图像，只绘制矩形框
-                draw.rectangle([preview_x, preview_y, preview_x + preview_w, preview_y + preview_h], 
-                             outline="blue", width=2)
-                draw.text((preview_x + 5, preview_y + 5), area["label"], fill="blue")
-        
-        # 调整预览图像大小以适应显示区域
-        max_display_size = 400  # 最大显示尺寸
-        ratio = min(max_display_size / preview_width, max_display_size / preview_height)
-        display_size = (int(preview_width * ratio), int(preview_height * ratio))
-        preview_img = preview_img.resize(display_size, Image.LANCZOS)
-        
-        # 显示图像
+            
+            # 如果是当前选中的区域，添加红色边框
+            if selected_id is not None and area["id"] == selected_id:
+                # 绘制红色边框
+                draw.rectangle(
+                    [scaled_x, scaled_y, scaled_x + scaled_width, scaled_y + scaled_height],
+                    outline="red", 
+                    width=3
+                )
+       
+        # 创建可点击的预览标签
         photo = ImageTk.PhotoImage(preview_img)
         self.area_preview_label.configure(image=photo)
         self.area_preview_label.image = photo
+        
+        # 绑定点击事件以放大预览
+        self.area_preview_label.bind("<Button-1>", lambda e: self.show_full_preview(preview_img))
+
+    def show_full_preview(self, preview_img):
+        """显示完整大小的预览图"""
+        # 创建新窗口显示完整预览
+        preview_window = tk.Toplevel(self.root)
+        preview_window.title("完整区域预览")
+        preview_window.geometry(f"{preview_img.width}x{preview_img.height}")
+        
+        # 创建图像标签
+        photo = ImageTk.PhotoImage(preview_img)
+        preview_label = tk.Label(preview_window, image=photo)
+        preview_label.image = photo  # 保持引用
+        preview_label.pack(fill=tk.BOTH, expand=True)
+        
+        # 添加关闭按钮
+        close_btn = ttk.Button(preview_window, text="关闭", command=preview_window.destroy)
+        close_btn.pack(pady=10)
     
     def select_area(self, area_type):
         """选择OCR区域"""
