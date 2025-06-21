@@ -18,11 +18,11 @@ os.makedirs("images", exist_ok=True)
 os.makedirs("config", exist_ok=True)
 
 # 图片识别基础信息：战斗界面、结束界面、材料界面
-FIGHT_REGION = (1334, 774, 413, 237)
+FIGHT_REGION = (1330, 753, 392, 233)
 FIGHT_IMAGE_PATH = "images/fight.png"
-OVER_REGION = (697, 364, 522, 384)
+OVER_REGION = (858, 366, 178, 155)
 OVER_IMAGE_PATH = "images/over.png"
-MATERIALS_REGION = (1033, 371, 191, 377)
+MATERIALS_REGION = (1039, 429, 118, 136)
 MATERIALS_IMAGE_PATH = "images/materials.png"
 
 class MonsterFarmApp:
@@ -1475,9 +1475,9 @@ class MonsterFarmApp:
         """监控任务"""
         # 逃跑点击组
         escape_clicks = [
-            {"coord": (1607, 935), "label": "点击逃跑", "repeat": 1, "delay_after": 0.2},
-            {"coord": (843, 673), "label": "逃跑确认", "repeat": 1, "delay_after": 1},
-            {"coord": (956, 673), "label": "结束确认", "repeat": 1, "delay_after": 0},
+            {"coord": (1582, 907), "label": "点击逃跑", "repeat": 1, "delay_after": 0.2},
+            {"coord": (847, 656), "label": "逃跑确认", "repeat": 1, "delay_after": 1},
+            {"coord": (959, 655), "label": "结束确认", "repeat": 1, "delay_after": 0},
         ]
         
         # 获取等级与血量配置
@@ -1574,7 +1574,7 @@ class MonsterFarmApp:
                     
                     # 发出告警声音
                     self.log_message("发现【特殊】精灵!!!")
-                    self.send_wechat_alarm(f"❗ {self.fight_config['username']} ❗ 抓捕过程中发现【特殊】形态精灵，等待人工处理…")
+                    self.send_wechat_alarm(f"❗ {self.fight_config['username']} ❗ 抓捕过程中发现【特殊/高个体】精灵，等待人工处理…")
                     winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
                     
                     # 继续寻找下一个野怪
@@ -1595,25 +1595,25 @@ class MonsterFarmApp:
         """刷野任务"""
         # 战斗结束后的点击组
         battle_end_clicks = [
-            {"coord": (956, 694), "label": "单点确认", "repeat": 1, "delay_after": 0.2},
-            {"coord": (974, 767), "label": "升级支持", "repeat": 1, "delay_after": 0.1},
-            {"coord": (956, 694), "label": "单点确认", "repeat": 1, "delay_after": 0.2},
-            {"coord": (956, 694), "label": "获取经验", "repeat": 1, "delay_after": 0.2},
+            {"coord": (961, 676), "label": "单点确认", "repeat": 1, "delay_after": 0.2},
+            {"coord": (971, 752), "label": "升级支持", "repeat": 1, "delay_after": 0.1},
+            {"coord": (961, 676), "label": "单点确认", "repeat": 1, "delay_after": 0.2},
+            {"coord": (961, 651), "label": "获取经验", "repeat": 1, "delay_after": 0.2},
         ]
         full_level_clicks = [
-            {"coord": (956, 694), "label": "单点确认", "repeat": 2, "delay_after": 0.2},
+            {"coord": (961, 676), "label": "单点确认", "repeat": 2, "delay_after": 0.2},
         ]
         # 根据技能选择确定坐标
         skill = self.fight_config.get("skill_selection", "3")
         if skill == "2":
-            skill_coord = (1185, 858)
+            skill_coord = (1179, 823)
         elif skill == "3":
-            skill_coord = (995, 945)
+            skill_coord = (988, 912)
         elif skill == "4":
-            skill_coord = (1189, 945)
+            skill_coord = (1176, 905)
         else:
             # 默认使用技能3
-            skill_coord = (995, 945)
+            skill_coord = (988, 912)
         
         # 战斗步骤
         battle_steps = [
@@ -1622,10 +1622,10 @@ class MonsterFarmApp:
         
         # 吃药步骤
         medicine_steps = [
-            {"coord": (1547, 975), "label": "精灵背包", "delay_after": 0.3, "repeat": 1},
-            {"coord": (894, 796), "label": "恢复精灵", "delay_after": 0.3, "repeat": 1},
-            {"coord": (955, 674), "label": "点击确定", "delay_after": 0.3, "repeat": 1},
-            {"coord": (904, 331), "label": "点击关闭", "delay_after": 0.3, "repeat": 1},
+            {"coord": (1523, 954), "label": "精灵背包", "delay_after": 0.3, "repeat": 1},
+            {"coord": (893, 756), "label": "恢复精灵", "delay_after": 0.3, "repeat": 1},
+            {"coord": (961, 676), "label": "点击确定", "delay_after": 0.3, "repeat": 1},
+            {"coord": (908, 319), "label": "点击关闭", "delay_after": 0.3, "repeat": 1},
         ]
         
         self.update_fight_log(f"\n开始刷野 {self.monster_name}，使用技能{skill}")
@@ -1758,7 +1758,7 @@ class MonsterFarmApp:
                 else:
                     # 检测到特殊形态时发出告警
                     self.update_fight_log(f"❌ 检测为特殊形态，跳过此次操作...")
-                    self.send_wechat_alarm(f"❗ {self.fight_config['username']} ❗ 抓捕过程中发现【特殊】形态精灵，等待人工处理…")
+                    self.send_wechat_alarm(f"❗ {self.fight_config['username']} ❗ 刷野过程中发现【特殊】形态精灵，等待人工处理…")
                     winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
                     
                     # 重新开始循环

@@ -14,158 +14,158 @@
         {
             "id": 1,
             "name": "\u70b9\u4f4d1",
-            "x": 1418,
-            "y": 665,
-            "r": 255,
-            "g": 255,
-            "b": 255,
-            "tolerance": 10
+            "x": 1422,
+            "y": 593,
+            "r": 251,
+            "g": 141,
+            "b": 51,
+            "tolerance": 0
         },
         {
             "id": 2,
             "name": "\u70b9\u4f4d2",
-            "x": 1466,
-            "y": 693,
+            "x": 1445,
+            "y": 680,
             "r": 213,
             "g": 0,
             "b": 0,
-            "tolerance": 10
+            "tolerance": 0
         }
     ],
     "monster_spots": [
         {
             "id": 1,
             "region": [
-                515,
-                661,
-                36,
-                43
+                915,
+                569,
+                29,
+                41
             ],
-            "image_path": "images\\jier\\monster_spot_20250614010353_1.png",
-            "label": "\u533a\u57df1",
+            "image_path": "images\\jier\\monster_spot_20250620224556.png",
+            "label": "\u533a\u57df2",
             "click_coord": [
-                533,
-                682
+                929,
+                589
             ]
         },
         {
             "id": 2,
             "region": [
-                615,
-                512,
-                33,
-                54
+                846,
+                707,
+                26,
+                48
             ],
-            "image_path": "images\\jier\\monster_spot_20250614010406_2.png",
+            "image_path": "images\\jier\\monster_spot_20250620224624.png",
             "label": "\u533a\u57df2",
             "click_coord": [
-                631,
-                539
+                859,
+                731
             ]
         },
         {
             "id": 3,
             "region": [
-                694,
-                385,
-                33,
-                48
+                1090,
+                707,
+                23,
+                36
             ],
-            "image_path": "images\\jier\\monster_spot_20250614010416_3.png",
+            "image_path": "images\\jier\\monster_spot_20250620224635.png",
             "label": "\u533a\u57df3",
             "click_coord": [
-                710,
-                409
+                1101,
+                725
             ]
         },
         {
             "id": 4,
             "region": [
-                917,
-                578,
-                30,
-                56
+                535,
+                648,
+                18,
+                39
             ],
-            "image_path": "images\\jier\\monster_spot_20250614010426_4.png",
+            "image_path": "images\\jier\\monster_spot_20250620224646.png",
             "label": "\u533a\u57df4",
             "click_coord": [
-                932,
-                606
+                544,
+                667
             ]
         },
         {
             "id": 5,
             "region": [
-                928,
-                830,
-                34,
-                54
+                985,
+                381,
+                26,
+                50
             ],
-            "image_path": "images\\jier\\monster_spot_20250614010443_5.png",
+            "image_path": "images\\jier\\monster_spot_20250620224704.png",
             "label": "\u533a\u57df5",
             "click_coord": [
-                945,
-                857
+                998,
+                406
             ]
         },
         {
             "id": 6,
             "region": [
-                980,
-                388,
-                37,
-                44
+                928,
+                810,
+                31,
+                48
             ],
-            "image_path": "images\\jier\\monster_spot_20250614010453_6.png",
+            "image_path": "images\\jier\\monster_spot_20250620224745.png",
             "label": "\u533a\u57df6",
             "click_coord": [
-                998,
-                410
+                943,
+                834
             ]
         },
         {
             "id": 7,
             "region": [
-                1052,
-                294,
-                39,
-                51
+                710,
+                383,
+                22,
+                40
             ],
-            "image_path": "images\\jier\\monster_spot_20250614010616_1.png",
+            "image_path": "images\\jier\\monster_spot_20250620224800.png",
             "label": "\u533a\u57df7",
             "click_coord": [
-                1071,
-                319
+                721,
+                403
             ]
         },
         {
             "id": 8,
             "region": [
-                1088,
-                721,
-                37,
+                1059,
+                298,
+                22,
                 39
             ],
-            "image_path": "images\\jier\\monster_spot_20250614010626_2.png",
+            "image_path": "images\\jier\\monster_spot_20250620224825.png",
             "label": "\u533a\u57df8",
             "click_coord": [
-                1106,
-                740
+                1070,
+                317
             ]
         },
         {
             "id": 9,
             "region": [
-                829,
-                724,
-                51,
+                702,
+                377,
+                28,
                 49
             ],
-            "image_path": "images\\jier\\monster_spot_20250614011248_1.png",
+            "image_path": "images\\jier\\monster_spot_20250620225026.png",
             "label": "\u533a\u57df9",
             "click_coord": [
-                854,
-                748
+                716,
+                401
             ]
         }
     ]
